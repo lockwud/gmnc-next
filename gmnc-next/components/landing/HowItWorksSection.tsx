@@ -27,9 +27,9 @@ export default function HowItWorksSection() {
 
   return (
     <section className="py-16 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div className="grid lg:grid-cols-12 gap-12 items-start mb-12">
-        <div className="lg:col-span-7">
-          <div className="flex items-center gap-2 mb-4">
+      <div className="flex flex-col justify-center gap-3 items-center text-center mb-12">
+        <div className="">
+          <div className="flex justify-center items-center gap-2 mb-4">
             <Plus className="w-5 h-5 text-blue-600" />
             <h4 className="text-blue-600 font-bold tracking-wider uppercase text-sm">How It Works</h4>
           </div>
@@ -37,13 +37,10 @@ export default function HowItWorksSection() {
             Trusted Care With A <br /> Focus On Your Child's Progress
           </h2>
         </div>
-        <div className="lg:col-span-5 flex flex-col justify-end h-full">
+        <div className=" flex flex-col h-full">
           <p className="text-slate-600 text-sm md:text-base leading-relaxed lg:pb-6">
             At GmNC, we've streamlined the healthcare process to ensure you receive the best pediatric care with ease and convenience.
           </p>
-          <div className="w-full h-60 mt-4 rounded-2xl overflow-hidden relative shadow-lg hidden lg:block">
-            <Image src="/images/he7.jpeg" alt="Medical facility" fill className="object-cover" />
-          </div>
         </div>
       </div>
 

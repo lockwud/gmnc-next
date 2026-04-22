@@ -28,9 +28,9 @@ export default function TestimonialsSection() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         <div className="flex flex-col items-center text-center max-w-3xl mx-auto mb-16 text-white">
-          <div className="flex items-center gap-2 mb-4">
-            <Plus className="w-5 h-5 text-orange-400" />
-            <h4 className="text-orange-400 font-bold tracking-wider uppercase text-sm">Patient Testimonials</h4>
+          <div className="flex items-center gap-2 mb-4 text-yellow-400">
+            <Plus className="w-5 h-5" />
+            <h4 className=" font-bold tracking-wider uppercase text-sm">Patient Testimonials</h4>
           </div>
           <h2 className="text-3xl md:text-5xl font-bold mb-6 leading-tight">
             Hear From Those Who Trust GmNC
@@ -52,7 +52,7 @@ export default function TestimonialsSection() {
                   <h4 className="font-bold text-lg">{testimonial.name}</h4>
                   <p className="text-sm text-white/70">{testimonial.location}</p>
                 </div>
-                <div className="w-10 h-10 rounded-full bg-orange-400 flex items-center justify-center flex-shrink-0 relative">
+                <div className="w-10 h-10 rounded-full bg-yellow-400 flex items-center justify-center flex-shrink-0 relative">
                   <Quote className="w-5 h-5 text-white fill-white absolute" />
                 </div>
               </div>
@@ -63,7 +63,7 @@ export default function TestimonialsSection() {
               
               <div className="flex items-center gap-1">
                 {[...Array(5)].map((_, i) => (
-                  <Star key={i} className="w-4 h-4 text-orange-400 fill-orange-400" />
+                  <Star key={i} className="w-4 h-4 text-yellow-400 fill-yellow-400" />
                 ))}
               </div>
             </div>

@@ -18,7 +18,7 @@ export default function FooterSection() {
             <p className="text-slate-600 mb-8 text-sm md:text-base">
               Subscribe to GmNC's newsletter and stay up to date on our services, medical advice, and more!
             </p>
-            <div className="flex items-center bg-white rounded-full p-2 max-w-md shadow-sm">
+            <div className="flex items-center bg-white rounded-full lg:p-2 max-w-md shadow-sm">
               <Mail className="w-5 h-5 text-slate-400 ml-3 mr-2" />
               <input 
                 type="email" 
@@ -44,9 +44,9 @@ export default function FooterSection() {
                 <Image 
                   src="/logo.png" 
                   alt="GmNC Logo" 
-                  width={32} 
-                  height={32} 
-                  className="w-8 h-8 object-contain bg-white rounded-sm p-1"
+                  width={60} 
+                  height={60} 
+                  className="w-12 h-12 object-contain bg-white rounded-sm p-1"
                 />
                 <span className="text-xl font-bold tracking-wide">GmNC</span>
               </Link>

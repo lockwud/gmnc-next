@@ -40,9 +40,9 @@ export default function ServicesSection() {
     {
       title: "Urgent Support",
       description: "Quick access to clinical experts, ensuring immediate care when you need it the most.",
-      icon: <PhoneCall className="w-6 h-6 text-white" />,
-      bg: "bg-[#71717a]", // zinc-500
-      textMode: "dark"
+      icon: <PhoneCall className="w-6 h-6 text-blue-600" />,
+      bg: "bg-blue-50/50",
+      textMode: "light"
     }
   ];
 

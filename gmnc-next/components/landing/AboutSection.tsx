@@ -13,21 +13,13 @@ export default function AboutSection() {
     <section className="py-20 lg:py-32 bg-white" id="about">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid lg:grid-cols-2 gap-16 items-center">
-          <div className="relative h-[550px] lg:h-[600px] w-full">
-            {/* Image 1 (Top Right / Back) */}
-            <div className="absolute top-0 right-0 lg:right-6 w-[70%] h-[350px] lg:h-[400px] rounded-3xl overflow-hidden shadow-2xl z-10">
-              <Image src="/images/he6.jfif" alt="Doctors collaborating" fill className="object-cover" />
+          <div className="relative h-[200px] md:h-[450] lg:h-[400px] w-full">            
+            {/* Image 1 */}
+            <div className="w-full lg:h-40">
+              <Image src="/images/he7.jpeg" alt="Patient consultation" fill className="lg:object-cover brightness-80 rounded-3xl shadow-2xl border-4 border-white" />
             </div>
-            
-            {/* Image 2 (Bottom Left / Front) */}
-            <div className="absolute bottom-0 left-0 w-[65%] h-[300px] lg:h-[350px] rounded-3xl overflow-hidden shadow-2xl z-20 border-8 border-white">
-              <Image src="/images/he7.jpeg" alt="Patient consultation" fill className="sm:object-cover" />
-            </div>
-
-            {/* Decorative background blurs */}
-            <div className="absolute -bottom-8 -right-8 w-64 h-64 bg-orange-100 rounded-full blur-3xl z-0"></div>
-            <div className="absolute top-10 -left-8 w-64 h-64 bg-blue-50 rounded-full blur-3xl z-0"></div>
           </div>
+
           <div>
             <span className="text-blue-600 font-semibold tracking-wider uppercase text-sm">About GmNC</span>
             <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mt-4 mb-6">

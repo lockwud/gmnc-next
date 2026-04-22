@@ -59,11 +59,11 @@ export default function HeroSection() {
             <div className="hidden lg:flex flex-col items-end justify-center gap-6 z-10 relative">
               <div className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-lg p-8 w-64 text-center transform hover:-translate-y-1 transition-transform">
                 <h3 className="text-4xl font-bold text-white mb-2">15+</h3>
-                <p className="text-slate-400 text-sm">Years of Clinical Experience</p>
+                <p className="text-white text-sm">Years of Clinical Experience</p>
               </div>
               <div className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-lg p-8 w-64 text-center transform hover:-translate-y-1 transition-transform mr-12">
                 <h3 className="text-4xl font-bold text-white mb-2">500+</h3>
-                <p className="text-slate-400 text-sm">Successful Therapy Sessions</p>
+                <p className="text-white text-sm">Successful Therapy Sessions</p>
               </div>
             </div>
             

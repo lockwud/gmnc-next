@@ -78,7 +78,7 @@ export default function LandingNavbar() {
                 : "border-slate-400 text-white hover:border-blue-500 hover:text-blue-500"
             }`}
           >
-            Provider Sign In
+            Download App
           </Link>
         </div>
 
