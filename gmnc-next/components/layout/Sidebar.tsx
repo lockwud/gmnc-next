@@ -59,8 +59,8 @@ export function Sidebar() {
       {/* Brand Logo */}
       <div className="h-20 flex items-center px-4 border-b border-slate-50 shrink-0">
         <Link href="/dashboard" className="flex items-center gap-3">
-          <div className="w-12 h-12 rounded-xl bg-white border border-slate-100 overflow-hidden flex items-center justify-center shrink-0 shadow-sm transition-all duration-200">
-             <img src="/logo.png" alt="GmNC Logo" className={cn("object-cover  transition-all duration-200", isCollapsed ? "w-10 h-10" : "w-12 h-12")} />
+          <div className="w-14 h-14 rounded-xl bg-white border border-slate-100 overflow-hidden flex items-center justify-center shrink-0 shadow-sm transition-all duration-200">
+             <img src="/logo.png" alt="GmNC Logo" className={cn("object-contain  transition-all duration-200", isCollapsed ? "w-10 h-10" : "w-14 h-14")} />
           </div>
           {!isCollapsed && (
             <motion.span 
@@ -69,14 +69,14 @@ export function Sidebar() {
               transition={{ delay: 0.1 }}
               className="font-bold text-lg text-primary tracking-tight whitespace-nowrap"
             >
-              GmNC <span className="text-emerald-500 font-bold text-[10px] block -mt-1 uppercase tracking-tighter">getmyneurocare</span>
+              GmNC <span className="text-emerald-500 font-bold text-[10px] block -mt-1 uppercase tracking-wide">getmyneurocare</span>
             </motion.span>
           )}
         </Link>
       </div>
 
       {/* Navigation */}
-      <nav className="flex-1 py-6 px-3 space-y-1 overflow-y-auto custom-scrollbar">
+      <nav className="flex-1 py-6 px-5 space-y-1 overflow-y-auto custom-scrollbar">
         {menuItems.map((item) => {
           const isActive = pathname === item.href;
           return (

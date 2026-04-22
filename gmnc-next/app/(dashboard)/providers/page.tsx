@@ -11,6 +11,7 @@ import { ProviderFilters } from "@/components/providers/ProviderFilters";
 import { ProviderTable } from "@/components/providers/ProviderTable";
 import { ProviderProfilePanel } from "@/components/providers/ProviderProfilePanel";
 import { cn } from "@/lib/utils";
+import { useUI } from "@/lib/context/UIContext";
 
 const providers = [
   { id: "GHA-101-544-1", name: "Dr. Louisa Parker", email: "louisaparker@gmail.com", phone: "024 000 3241", status: "Verified", sessions: 15, joinDate: "5/11/25" },
@@ -27,9 +28,24 @@ export default function ProvidersPage() {
   const router = useRouter();
   const isZoomed = searchParams.get("view") === "maximized";
   
+  const [data, setData] = React.useState(providers);
+  const [searchQuery, setSearchQuery] = React.useState("");
+  const [statusFilter, setStatusFilter] = React.useState("All");
   const [selectedProvider, setSelectedProvider] = React.useState<any>(providers[0]);
   const [showEditModal, setShowEditModal] = React.useState(false);
   const [showDeactivateModal, setShowDeactivateModal] = React.useState(false);
+  const { addToast } = useUI();
+
+  const handleAddProvider = () => {
+    addToast("New provider registered and awaiting credentials verification.", "success");
+  };
+
+  const filteredProviders = data.filter(p => {
+    const matchesSearch = p.name.toLowerCase().includes(searchQuery.toLowerCase()) || 
+                         p.id.toLowerCase().includes(searchQuery.toLowerCase());
+    const matchesStatus = statusFilter === "All" || p.status === statusFilter;
+    return matchesSearch && matchesStatus;
+  });
 
   const toggleZoom = () => {
     const params = new URLSearchParams(searchParams);
@@ -67,9 +83,17 @@ export default function ProvidersPage() {
           isZoomed ? "col-span-1" : "lg:col-span-2"
         )}>
           <Card className="border border-slate-100 shadow-sm rounded-[2.5rem] bg-white overflow-hidden h-full">
-            <ProviderFilters isZoomed={isZoomed} onToggleZoom={toggleZoom} />
+            <ProviderFilters 
+              isZoomed={isZoomed} 
+              onToggleZoom={toggleZoom}
+              searchQuery={searchQuery}
+              onSearchChange={setSearchQuery}
+              statusFilter={statusFilter}
+              onStatusChange={setStatusFilter}
+              onAdd={handleAddProvider}
+            />
             <ProviderTable 
-              providers={providers}
+              providers={filteredProviders}
               selectedId={selectedProvider?.id}
               onSelect={setSelectedProvider}
               onEdit={() => setShowEditModal(true)}

@@ -8,6 +8,8 @@ import { Badge } from "@/components/ui/Badge";
 import { Card } from "@/components/ui/Card";
 import { Modal } from "@/components/ui/Modal";
 import { cn } from "@/lib/utils";
+import { useUI } from "@/lib/context/UIContext";
+import { motion, AnimatePresence } from "framer-motion";
 
 const clients = [
   { id: "CP-882-001", name: "Tijani Dromo", email: "tijani@example.com", phone: "024 234 5678", region: "Greater Accra", status: "Verified", sessions: 3, joinDate: "1/12/25" },
@@ -18,7 +20,29 @@ const clients = [
 ];
 
 export default function ClientsPage() {
+  const [data, setData] = React.useState(clients);
+  const [searchQuery, setSearchQuery] = React.useState("");
+  const [regionFilter, setRegionFilter] = React.useState("All Regions");
   const [showAddClientModal, setShowAddClientModal] = React.useState(false);
+  const { addToast } = useUI();
+
+  const filteredClients = data.filter(c => {
+    const matchesSearch = c.name.toLowerCase().includes(searchQuery.toLowerCase()) || 
+                         c.id.toLowerCase().includes(searchQuery.toLowerCase());
+    const matchesRegion = regionFilter === "All Regions" || c.region === regionFilter;
+    return matchesSearch && matchesRegion;
+  });
+
+  const handleDeactivate = (id: string, name: string) => {
+    setData(prev => prev.filter(c => c.id !== id));
+    addToast(`Account for ${name} has been deactivated.`, "info");
+  };
+
+  const handleAddClient = (e: React.FormEvent) => {
+    e.preventDefault();
+    setShowAddClientModal(false);
+    addToast("New client registered successfully awaiting verification.", "success");
+  };
 
   return (
     <div className="space-y-8 pb-12">
@@ -68,15 +92,24 @@ export default function ClientsPage() {
               <input 
                 placeholder="Search by name, ID or email..." 
                 className="w-full pl-12 pr-4 py-3 bg-slate-50 border border-slate-50 rounded-2xl text-sm font-medium focus:outline-none focus:ring-2 focus:ring-emerald-500/10 transition-all font-medium"
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
               />
             </div>
             <div className="flex items-center gap-2">
-              <Button variant="ghost" className="h-12 px-5 text-slate-500 text-sm font-bold gap-2 hover:bg-slate-50 rounded-2xl border border-slate-50">
-                <Filter size={18} className="text-slate-400" /> Region
-              </Button>
-              <Button variant="ghost" className="h-12 px-5 text-slate-500 text-sm font-bold gap-2 hover:bg-slate-50 rounded-2xl border border-slate-50">
-                <Calendar size={18} className="text-slate-400" /> Date Joined
-              </Button>
+              <div className="relative group">
+                <Button variant="ghost" className={cn(
+                    "h-12 px-5 text-slate-500 text-sm font-bold gap-2 hover:bg-slate-50 rounded-2xl border border-slate-50",
+                    regionFilter !== "All Regions" && "border-emerald-500 bg-emerald-50 text-emerald-700"
+                )}>
+                  <Filter size={18} className="text-slate-400" /> {regionFilter}
+                </Button>
+                <div className="absolute top-14 left-0 w-48 bg-white border border-slate-100 shadow-xl rounded-2xl p-2 hidden group-hover:block z-50 animate-in fade-in zoom-in duration-200">
+                    {["All Regions", "Greater Accra", "Ashanti Region", "Central Region", "Eastern Region"].map(r => (
+                        <button key={r} onClick={() => setRegionFilter(r)} className="w-full flex items-center gap-3 px-4 py-2 hover:bg-slate-50 rounded-xl text-sm font-bold text-slate-600 transition-all text-left">{r}</button>
+                    ))}
+                </div>
+              </div>
             </div>
           </div>
           
@@ -100,46 +133,60 @@ export default function ClientsPage() {
               </tr>
             </thead>
             <tbody className="divide-y divide-slate-50">
-              {clients.map((client) => (
-                <tr key={client.id} className="hover:bg-emerald-50/30 transition-all group cursor-pointer">
-                  <td className="p-5 pl-8">
-                    <div className="flex items-center gap-4">
-                      <div className="w-11 h-11 rounded-2xl bg-slate-50 border border-slate-100 flex items-center justify-center text-slate-300 group-hover:bg-white transition-all group-hover:shadow-sm">
-                        <User size={22} strokeWidth={1.5} />
+              <AnimatePresence initial={false}>
+                {filteredClients.map((client) => (
+                  <motion.tr 
+                    key={client.id} 
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    exit={{ opacity: 0, x: -20 }}
+                    className="hover:bg-emerald-50/30 transition-all group cursor-pointer"
+                  >
+                    <td className="p-5 pl-8">
+                      <div className="flex items-center gap-4">
+                        <div className="w-11 h-11 rounded-2xl bg-slate-50 border border-slate-100 flex items-center justify-center text-slate-300 group-hover:bg-white transition-all group-hover:shadow-sm">
+                          <User size={22} strokeWidth={1.5} />
+                        </div>
+                        <div>
+                          <p className="font-bold text-primary group-hover:text-emerald-600 transition-colors">{client.name}</p>
+                          <p className="text-[10px] text-slate-400 font-bold uppercase">{client.id}</p>
+                        </div>
                       </div>
-                      <div>
-                        <p className="font-bold text-primary group-hover:text-emerald-600 transition-colors">{client.name}</p>
-                        <p className="text-[10px] text-slate-400 font-bold uppercase">{client.id}</p>
+                    </td>
+                    <td className="p-5">
+                      <div className="flex items-center gap-2">
+                         <MapPin size={14} className="text-slate-300" />
+                         <span className="text-sm font-bold text-slate-600">{client.region}</span>
                       </div>
-                    </div>
-                  </td>
-                  <td className="p-5">
-                    <div className="flex items-center gap-2">
-                       <MapPin size={14} className="text-slate-300" />
-                       <span className="text-sm font-bold text-slate-600">{client.region}</span>
-                    </div>
-                  </td>
-                  <td className="p-5">
-                    <span className="text-sm font-bold text-slate-600">{client.phone}</span>
-                  </td>
-                  <td className="p-5">
-                    <Badge variant={client.status === "Verified" ? "success" : "danger"} className="text-[10px] uppercase font-bold border-none px-2.5 py-1">
-                      {client.status}
-                    </Badge>
-                  </td>
-                  <td className="p-5 text-center">
-                    <span className="text-sm font-extrabold text-primary">{client.sessions}</span>
-                  </td>
-                  <td className="p-5">
-                    <span className="text-sm font-bold text-slate-400">{client.joinDate}</span>
-                  </td>
-                  <td className="p-5 pr-8 text-right">
-                    <Button variant="ghost" size="icon" className="text-slate-300 group-hover:text-primary">
-                      <MoreVertical size={18} />
-                    </Button>
-                  </td>
-                </tr>
-              ))}
+                    </td>
+                    <td className="p-5">
+                      <span className="text-sm font-bold text-slate-600">{client.phone}</span>
+                    </td>
+                    <td className="p-5">
+                      <Badge variant={client.status === "Verified" ? "success" : "danger"} className="text-[10px] uppercase font-bold border-none px-2.5 py-1">
+                        {client.status}
+                      </Badge>
+                    </td>
+                    <td className="p-5 text-center">
+                      <span className="text-sm font-extrabold text-primary">{client.sessions}</span>
+                    </td>
+                    <td className="p-5">
+                      <span className="text-sm font-bold text-slate-400">{client.joinDate}</span>
+                    </td>
+                    <td className="p-5 pr-8 text-right relative">
+                      <div className="group/menu relative inline-block">
+                        <Button variant="ghost" size="icon" className="text-slate-300 group-hover:text-primary">
+                          <MoreVertical size={18} />
+                        </Button>
+                        <div className="absolute right-10 top-1/2 -translate-y-1/2 w-40 bg-white border border-slate-100 shadow-xl rounded-xl p-2 hidden group-hover/menu:block z-50 animate-in fade-in zoom-in duration-200">
+                           <button className="w-full text-left px-4 py-2 hover:bg-slate-50 rounded-lg text-sm font-bold text-slate-600 transition-all">Edit Profile</button>
+                           <button onClick={() => handleDeactivate(client.id, client.name)} className="w-full text-left px-4 py-2 hover:bg-rose-50 rounded-lg text-sm font-bold text-rose-500 transition-all">Deactivate</button>
+                        </div>
+                      </div>
+                    </td>
+                  </motion.tr>
+                ))}
+              </AnimatePresence>
             </tbody>
           </table>
         </div>
@@ -152,7 +199,7 @@ export default function ClientsPage() {
         title="Register New Client"
         maxWidth="max-w-xl"
       >
-        <form className="space-y-8">
+        <form className="space-y-8" onSubmit={handleAddClient}>
            <div className="space-y-6">
               <div className="grid grid-cols-2 gap-4">
                  <Input label="First Name" placeholder="e.g. John" icon={<User size={18} className="text-slate-400" />} />

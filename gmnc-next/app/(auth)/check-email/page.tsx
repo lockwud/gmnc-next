@@ -30,10 +30,10 @@ export default function CheckEmailPage() {
         initial={{ opacity: 0, y: 30 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ type: "spring", stiffness: 100, damping: 20 }}
-        className="w-full max-w-5xl grid grid-cols-1 lg:grid-cols-2 backdrop-blur-md rounded-[3rem] border border-blue shadow-premium overflow-hidden relative"
+        className="w-full max-w-5xl grid grid-cols-1 lg:grid-cols-2 overflow-hidden relative"
       >
         {/* Brand Side - Glass Texture */}
-        <div className="hidden lg:flex flex-col justify-around p-8 bg-white/40 relative overflow-hidden">
+        <div className="hidden lg:flex flex-col justify-around p-8 relative overflow-hidden">
           <div className="absolute top-0 right-0 w-64 h-64 bg-emerald-200/20 rounded-full blur-3xl -mr-32 -mt-32" />
           
           <motion.div 
@@ -74,12 +74,12 @@ export default function CheckEmailPage() {
         </div>
 
         {/* Content Side */}
-        <div className="p-8 lg:p-12 flex flex-col justify-center bg-white/80 relative text-center lg:text-left">
+        <div className="p-8 lg:p-12 flex flex-col justify-center relative text-center lg:text-left">
           <motion.div 
             initial={{ opacity: 0, scale: 0.8 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ delay: 0.3 }}
-            className="w-16 h-16 rounded-3xl bg-white/50 backdrop-blur-sm flex items-center justify-center mb-6 border border-white/60 shadow-sm mx-auto lg:mx-0"
+            className="w-16 h-16 rounded-3xl bg-white/50 backdrop-blur-sm flex items-center justify-center mb-6 mx-auto lg:mx-0"
           >
              <MailCheck className="text-emerald-500 w-8 h-8" />
           </motion.div>

@@ -34,6 +34,7 @@ export default function DashboardPage() {
           icon={Users}
           iconColor="text-emerald-500"
           iconBg="bg-emerald-50"
+          href="/clients"
         />
         <MetricCard
           title="Service Providers"
@@ -43,6 +44,7 @@ export default function DashboardPage() {
           icon={ShieldCheck}
           iconColor="text-sky-500"
           iconBg="bg-sky-50"
+          href="/providers"
         />
         <MetricCard
           title="Inactive Caregivers"
@@ -52,6 +54,7 @@ export default function DashboardPage() {
           icon={UserMinus}
           iconColor="text-purple-500"
           iconBg="bg-purple-50"
+          href="/clients?status=inactive"
         />
         <MetricCard
           title="Inactive Providers"
@@ -61,6 +64,7 @@ export default function DashboardPage() {
           icon={AlertTriangle}
           iconColor="text-rose-500"
           iconBg="bg-rose-50"
+          href="/providers?status=inactive"
         />
       </div>
 

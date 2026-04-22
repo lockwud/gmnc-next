@@ -87,10 +87,10 @@ export default function ResetPasswordPage() {
         initial={{ opacity: 0, y: 30 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ type: "spring", stiffness: 100, damping: 20 }}
-        className="w-full max-w-5xl grid grid-cols-1 lg:grid-cols-2 backdrop-blur-md rounded-[3rem] border border-blue shadow-premium overflow-hidden relative"
+        className="w-full max-w-5xl grid grid-cols-1 lg:grid-cols-2 overflow-hidden relative"
       >
         {/* Brand Side - Glass Texture */}
-        <div className="hidden lg:flex flex-col justify-around p-10 bg-white/40 relative overflow-hidden">
+        <div className="hidden lg:flex flex-col justify-around p-10 relative overflow-hidden">
           <div className="absolute top-0 right-0 w-64 h-64 bg-emerald-200/20 rounded-full blur-3xl -mr-32 -mt-32" />
           
           <motion.div 
@@ -131,7 +131,7 @@ export default function ResetPasswordPage() {
         </div>
 
         {/* Form Side */}
-        <div className="p-6 lg:p-10 flex flex-col justify-center bg-white/80 relative">
+        <div className="p-6 lg:p-10 flex flex-col justify-center relative">
           <div className="mb-6 text-center lg:text-left">
             <motion.h3 
               initial={{ opacity: 0, x: 20 }}
