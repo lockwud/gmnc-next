@@ -13,6 +13,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://getmyneurocare.org"),
   title: "GetMyNeurocare | Online Neurology Care & Brain Health Services",
   description: "GetMyNeurocare - Your trusted online neurology care platform. Connect with board-certified neurologists for expert brain health consultations, diagnosis, and treatment.",
   keywords: [
