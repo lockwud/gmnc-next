@@ -67,7 +67,7 @@ export default function AnalyticsPage() {
              <Card className="p-8 border-none shadow-sm flex flex-col items-center justify-center min-h-[380px] bg-white text-center">
                 <h3 className="text-sm font-bold text-slate-400 uppercase tracking-widest mb-4">General Improvement</h3>
                 <div className="relative w-full h-64 flex items-center justify-center">
-                   <ResponsiveContainer width="100%" height="100%">
+                   <ResponsiveContainer width="100%" height={256}>
                       <RadialBarChart
                         innerRadius="80%"
                         outerRadius="100%"
@@ -113,8 +113,8 @@ export default function AnalyticsPage() {
                      <option>Monthly</option>
                    </select>
                 </div>
-                <div className="flex-1 w-full">
-                  <ResponsiveContainer width="100%" height="100%">
+                <div className="flex-1 w-full min-h-[220px]">
+                  <ResponsiveContainer width="100%" height={220}>
                     <BarChart data={barData} margin={{ top: 0, right: 0, left: -20, bottom: 0 }}>
                        <XAxis 
                          dataKey="name" 

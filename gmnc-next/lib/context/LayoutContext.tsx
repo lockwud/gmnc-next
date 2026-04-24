@@ -6,12 +6,16 @@ interface LayoutContextType {
   isCollapsed: boolean;
   toggleSidebar: () => void;
   setIsCollapsed: (collapsed: boolean) => void;
+  isMobileOpen: boolean;
+  toggleMobileSidebar: () => void;
+  closeMobileSidebar: () => void;
 }
 
 const LayoutContext = createContext<LayoutContextType | undefined>(undefined);
 
 export function LayoutProvider({ children }: { children: React.ReactNode }) {
   const [isCollapsed, setIsCollapsed] = useState(false);
+  const [isMobileOpen, setIsMobileOpen] = useState(false);
 
   // Load initial state from localStorage if available
   useEffect(() => {
@@ -29,8 +33,20 @@ export function LayoutProvider({ children }: { children: React.ReactNode }) {
     });
   };
 
+  const toggleMobileSidebar = () => setIsMobileOpen((prev) => !prev);
+  const closeMobileSidebar = () => setIsMobileOpen(false);
+
   return (
-    <LayoutContext.Provider value={{ isCollapsed, toggleSidebar, setIsCollapsed }}>
+    <LayoutContext.Provider
+      value={{
+        isCollapsed,
+        toggleSidebar,
+        setIsCollapsed,
+        isMobileOpen,
+        toggleMobileSidebar,
+        closeMobileSidebar,
+      }}
+    >
       {children}
     </LayoutContext.Provider>
   );

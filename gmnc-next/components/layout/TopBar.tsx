@@ -1,12 +1,14 @@
 "use client";
 
 import * as React from "react";
-import { Search, Bell, HelpCircle, ChevronRight, User } from "lucide-react";
+import { Search, Bell, HelpCircle, ChevronRight, User, Menu } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { useState } from "react";
 import { Button } from "@/components/ui/Button";
 import { Input } from "@/components/ui/Input";
 import { usePathname, useRouter } from "next/navigation";
 import { useUI } from "@/lib/context/UIContext";
+import { useLayout } from "@/lib/context/LayoutContext";
 import { NotificationsPopover } from "@/components/dashboard/NotificationsPopover";
 import Link from "next/link";
 
@@ -14,10 +16,22 @@ export function TopBar() {
   const pathname = usePathname();
   const router = useRouter();
   const { setSearchOpen, setNotificationsOpen, isNotificationsOpen, setProfileOpen, isProfileOpen } = useUI();
+  const { toggleMobileSidebar } = useLayout();
   const segments = pathname.split("/").filter(Boolean);
 
+
+
   return (
-    <header className="sticky top-0 z-40 w-full h-20 bg-white border-b border-slate-100 flex items-center px-8 justify-between gap-8 shadow-sm">
+    <header className="sticky top-0 z-40 w-full h-20 bg-white border-b border-slate-100 flex items-center px-4 md:px-8 justify-between gap-4 md:gap-8 shadow-sm">
+      {/* Mobile hamburger */}
+      <button
+        className="md:hidden flex items-center justify-center w-9 h-9 rounded-xl text-slate-500 hover:bg-slate-50 hover:text-primary transition-all shrink-0"
+        onClick={toggleMobileSidebar}
+        aria-label="Open menu"
+      >
+        <Menu size={22} />
+      </button>
+
       {/* Search & Breadcrumbs Container */}
       <div className="flex-1 flex items-center gap-8">
         <div className="w-full max-w-md">
@@ -73,22 +87,26 @@ export function TopBar() {
         <div className="h-8 w-[1px] bg-slate-200" />
 
         {/* User Profile */}
-        <div className="relative group">
+        <div className="relative ">
           <div className="flex items-center gap-3 pl-2 opacity-50 cursor-not-allowed group-hover:opacity-100 transition-opacity">
             <div className="flex flex-col items-end hidden sm:flex">
               <span className="text-sm font-semibold text-primary leading-tight">Admin User</span>
               <span className="text-xs text-slate-400">System Administrator</span>
             </div>
-            <div className="w-10 h-10 rounded-xl bg-slate-100 border border-slate-200 flex items-center justify-center text-primary group-hover:bg-slate-200 cursor-pointer transition-colors">
+            <div className="w-10 h-10 rounded-xl bg-slate-100 border border-slate-200 flex items-center justify-center text-primary group-hover:bg-slate-200 cursor-pointer transition-colors" onClick={() => setProfileOpen(true)}>
               <User size={20} />
             </div>
           </div>
           
           {/* Simple Mock Profile Menu */}
-          <div className="absolute right-0 top-14 w-48 bg-white border border-slate-100 shadow-xl rounded-2xl p-2 hidden group-hover:block animate-in fade-in zoom-in duration-200 z-[60]">
-             <Link href="/settings" className="w-full flex items-center gap-3 px-4 py-2 hover:bg-slate-50 rounded-xl text-sm font-bold text-slate-600 transition-all">Profile Settings</Link>
-             <Link href="/login" className="w-full flex items-center gap-3 px-4 py-2 hover:bg-rose-50 rounded-xl text-sm font-bold text-rose-500 transition-all">Logout</Link>
+          {
+            isProfileOpen && (
+              <div className="absolute right-0 top-14 w-48 bg-white border border-slate-100 shadow-xl rounded-2xl p-2  animate-in fade-in zoom-in duration-200 z-[60]">
+             <Link href="/settings" className="w-full flex items-center gap-3 px-4 py-2 hover:bg-slate-50 rounded-xl text-sm font-bold text-slate-600 transition-all" onClick={() => setProfileOpen(false)}>Profile Settings</Link>
+             <Link href="/login" className="w-full flex items-center gap-3 px-4 py-2 hover:bg-rose-50 rounded-xl text-sm font-bold text-rose-500 transition-all" onClick={() => setProfileOpen(false)}>Logout</Link>
           </div>
+            )
+          }
         </div>
       </div>
     </header>

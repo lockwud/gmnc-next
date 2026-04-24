@@ -36,7 +36,7 @@ export function UserDistributionChart() {
       <CardContent className="flex-1 min-h-[380px] relative mt-2">
         {/* Polar Axis Background Layer */}
         <div className="absolute inset-0 flex items-center justify-center opacity-40 pointer-events-none pr-8">
-            <ResponsiveContainer width="100%" height="100%">
+            <ResponsiveContainer width="100%" height={300}>
                <PieChart>
                   <PolarGrid stroke="#e2e8f0" />
                   <PolarAngleAxis
@@ -52,7 +52,7 @@ export function UserDistributionChart() {
         </div>
 
         <div className="absolute inset-0 flex items-center justify-center pt-4">
-            <ResponsiveContainer width="100%" height="100%">
+            <ResponsiveContainer width="100%" height={300}>
                 <PieChart>
                     {/* Therapist (Outer) */}
                     <Pie
