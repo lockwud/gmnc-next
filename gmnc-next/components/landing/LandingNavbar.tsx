@@ -71,7 +71,7 @@ export default function LandingNavbar() {
           </div>
           
           <Link
-            href="/login"
+            href="/"
             className={`px-6 py-2.5 rounded border text-sm font-medium transition-colors ${
               scrolled 
                 ? "border-slate-400 text-slate-900 hover:text-blue-600 hover:border-blue-600" 
@@ -129,11 +129,11 @@ export default function LandingNavbar() {
             
             <div className="mt-8">
               <Link
-                href="/login"
+                href="/"
                 onClick={() => setMobileMenuOpen(false)}
                 className="flex items-center justify-center w-full px-6 py-3 rounded bg-blue-600 text-white font-medium hover:bg-blue-700 shadow-lg shadow-blue-600/30 transition-colors"
               >
-                Provider Sign In
+                Download App
               </Link>
             </div>
           </nav>

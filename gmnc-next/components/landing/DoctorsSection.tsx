@@ -40,7 +40,7 @@ export default function DoctorsSection() {
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
           {doctors.map((doctor) => (
             <div key={doctor.id} className="bg-white rounded-2xl shadow-sm border border-slate-100 overflow-hidden group hover:shadow-xl transition-shadow duration-300">
-              <div className="aspect-[4/3] bg-gradient-to-br from-indigo-50 to-blue-50 relative flex items-center justify-center overflow-hidden">
+              <div className="aspect-[3/3] bg-gradient-to-br from-indigo-50 to-blue-50 relative flex items-center justify-center overflow-hidden">
                 <Image src={doctor.image} alt={doctor.name} fill className="object-cover group-hover:scale-105 transition-transform duration-500" />
                 
                 <div className="absolute bottom-4 right-4 flex flex-col gap-2 opacity-0 group-hover:opacity-100 transform translate-x-4 group-hover:translate-x-0 transition-all duration-300">

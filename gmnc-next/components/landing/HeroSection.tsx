@@ -41,7 +41,7 @@ export default function HeroSection() {
               
               <div className="flex flex-wrap gap-4">
                 <Link
-                  href="/login"
+                  href="/"
                   className="px-8 py-3.5 rounded bg-blue-600 text-white font-medium hover:bg-blue-700 transition-colors shadow-lg shadow-blue-900/20"
                 >
                   Get Started
