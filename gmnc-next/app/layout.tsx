@@ -71,6 +71,9 @@ export const viewport: Viewport = {
   maximumScale: 5,
 };
 
+import { AuthProvider } from "../lib/context/AuthContext";
+import { UIProvider } from "../lib/context/UIContext";
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -81,7 +84,13 @@ export default function RootLayout({
       lang="en"
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
-      <body className="min-h-full w-full flex flex-col">{children}</body>
+      <body className="min-h-full w-full flex flex-col">
+        <AuthProvider>
+          <UIProvider>
+            {children}
+          </UIProvider>
+        </AuthProvider>
+      </body>
     </html>
   );
 }

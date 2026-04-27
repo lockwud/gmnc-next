@@ -1,202 +1,161 @@
-"use client";
+'use client';
 
-import * as React from "react";
-import Link from "next/link";
-import { usePathname } from "next/navigation";
-import { motion, AnimatePresence } from "framer-motion";
+import React from 'react';
+import Link from 'next/link';
+import { usePathname } from 'next/navigation';
+import { useAuth } from '@/lib/context/AuthContext';
+import { Permission } from '@/lib/rbac';
 import { 
-  LayoutDashboard, 
-  Users, 
-  UserSquare2, 
-  ClipboardList, 
-  MessageSquare, 
-  LifeBuoy, 
-  BarChart2, 
-  Settings, 
-  LogOut,
-  ChevronLeft,
-  Menu,
-  Bell,
-  DoorOpen,
-  User,
-  ListChecks,
-  Mail,
-  PersonStanding,
-  Flag,
-  Grid2X2,
-  Grid2X2Plus,
-  X
-} from "lucide-react";
-import { cn } from "@/lib/utils";
-import { Button } from "@/components/ui/Button";
-import { useLayout } from "@/lib/context/LayoutContext";
+  LayoutDashboardIcon, 
+  CalendarIcon, 
+  UsersIcon, 
+  ActivityIcon,
+  MessageSquareIcon,
+  StethoscopeIcon,
+  SettingsIcon, 
+  HelpCircleIcon,
+  LogOutIcon,
+  ShieldAlertIcon,
+  ServerIcon,
+  UserIcon
+} from 'lucide-react';
+import { cn } from '@/lib/utils';
 
-const menuItems = [
-  { name: "Dashboard", icon: Grid2X2Plus, href: "/dashboard" },
-  { name: "Service Providers", icon: Users, href: "/providers" },
-  { name: "Individual with CP", icon: User, href: "/clients" },
-  { name: "Task ", icon: ListChecks, href: "/tasks" },
-  { name: "Message", icon: Mail, href: "/inbox", badge: 4 },
-  { name: "Support", icon: PersonStanding, href: "/support" },
-  { name: "Analytics", icon: Flag, href: "/analytics" },
-  { name: "Settings", icon: Settings, href: "/settings" },
-  { name: "Logout", icon: LogOut, href: "/login" },
+interface MenuItem {
+  label: string;
+  icon: any;
+  href: string;
+  permission?: Permission;
+}
+
+interface MenuCategory {
+  title: string;
+  items: MenuItem[];
+}
+
+const MENU_CATEGORIES: MenuCategory[] = [
+  {
+    title: 'MAIN',
+    items: [
+      { label: 'Overview', icon: LayoutDashboardIcon, href: '/dashboard' },
+      { label: 'Admin Dashboard', icon: ShieldAlertIcon, href: '/admin', permission: 'system.manage' },
+      { label: 'Caregiver Dashboard', icon: UserIcon, href: '/caregiver', permission: 'caregiver.read' },
+    ]
+  },
+  {
+    title: 'ADMINISTRATION',
+    items: [
+      { label: 'User Management', icon: UsersIcon, href: '/admin/users', permission: 'system.manage' },
+      { label: 'Roles & Access', icon: ShieldAlertIcon, href: '/admin/roles', permission: 'system.manage' },
+      { label: 'Audit Viewer', icon: ActivityIcon, href: '/admin/audit', permission: 'system.manage' },
+      { label: 'Referral Campaigns', icon: UsersIcon, href: '/admin/referrals', permission: 'system.manage' },
+      { label: 'Integrations', icon: ServerIcon, href: '/admin/integrations', permission: 'system.manage' },
+    ]
+  },
+  {
+    title: 'CLINICAL OPERATIONS',
+    items: [
+      { label: 'Appointments', icon: CalendarIcon, href: '/provider/appointments', permission: 'appointment.read' },
+      { label: 'Patient List', icon: UsersIcon, href: '/provider/clients', permission: 'appointment.read' },
+      { label: 'Referral Track', icon: MessageSquareIcon, href: '/provider/referrals', permission: 'appointment.read' },
+      { label: 'Tasks & Notes', icon: CalendarIcon, href: '/provider/tasks', permission: 'appointment.read' },
+      { label: 'Provider Network', icon: StethoscopeIcon, href: '/admin/providers', permission: 'system.manage' },
+    ]
+  },
+  {
+    title: 'PATIENT PORTAL',
+    items: [
+      { label: 'Telehealth', icon: MessageSquareIcon, href: '/caregiver/telehealth', permission: 'caregiver.read' },
+      { label: 'Games & Well-being', icon: ActivityIcon, href: '/caregiver/games', permission: 'caregiver.read' },
+      { label: 'Rewards', icon: SettingsIcon, href: '/caregiver/rewards', permission: 'caregiver.read' },
+    ]
+  },
+  {
+    title: 'SYSTEM & SUPPORT',
+    items: [
+      { label: 'Support Queue', icon: HelpCircleIcon, href: '/support', permission: 'support.read' },
+      { label: 'FAQ Database', icon: MessageSquareIcon, href: '/support/faqs', permission: 'support.read' },
+      { label: 'Infrastructure', icon: ServerIcon, href: '/tester', permission: 'tester.all' },
+      { label: 'Billing & Usage', icon: SettingsIcon, href: '/provider/billing', permission: 'appointment.read' },
+      { label: 'Settings', icon: SettingsIcon, href: '/settings' },
+    ]
+  }
 ];
 
-/** Shared nav items used by both desktop and mobile sidebar */
-function NavItems({
-  isCollapsed,
-  onNavClick,
-}: {
-  isCollapsed: boolean;
-  onNavClick?: () => void;
-}) {
+export function Sidebar() {
   const pathname = usePathname();
+  const { user, logout } = useAuth();
 
-  return (
-    <nav className="flex-1 py-6 px-5 space-y-1 overflow-y-auto custom-scrollbar">
-      {menuItems.map((item) => {
+  const renderMenuItems = (items: MenuItem[]) => {
+    return items
+      .filter(item => !item.permission || user?.permissions.includes(item.permission))
+      .map((item) => {
         const isActive = pathname === item.href;
         return (
-          <Link key={item.name} href={item.href} onClick={onNavClick}>
-            <div
-              className={cn(
-                "group flex items-center gap-3 px-3 py-3 rounded-xl transition-all relative text-md",
-                isActive
-                  ? "bg-blue-500 text-white"
-                  : "text-gray-700 hover:bg-slate-50 hover:text-primary"
-              )}
-            >
-              <item.icon
-                className={cn(
-                  "w-5 h-5 shrink-0 transition-colors",
-                  isActive ? "text-white" : "text-slate-400 group-hover:text-primary"
-                )}
-              />
-              {!isCollapsed && (
-                <motion.span
-                  initial={{ opacity: 0, x: -10 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  className="whitespace-nowrap"
-                >
-                  {item.name}
-                </motion.span>
-              )}
-              {item.badge && !isCollapsed && (
-                <span className="absolute right-3 top-1/2 -translate-y-1/2 flex h-5 w-5 items-center justify-center rounded-full bg-accent text-[10px] font-bold text-white">
-                  {item.badge}
-                </span>
-              )}
-            </div>
+          <Link
+            key={item.label}
+            href={item.href}
+            className={cn(
+              "flex items-center gap-3 px-4 py-2 text-[13px] font-medium transition-all duration-200 group relative",
+              isActive 
+                ? "bg-[#059669] text-white" 
+                : "text-slate-600 hover:bg-slate-50 hover:text-slate-900"
+            )}
+          >
+            <item.icon className={cn(
+              "w-4 h-4 transition-transform duration-200",
+              isActive ? "text-white" : "text-slate-400 group-hover:text-slate-600"
+            )} />
+            <span className="tracking-tight">{item.label}</span>
+            {isActive && (
+              <div className="absolute left-0 top-0 bottom-0 w-1 bg-white/20" />
+            )}
           </Link>
         );
-      })}
-    </nav>
-  );
-}
+      });
+  };
 
-/** Brand logo header shared by both desktop/mobile */
-function SidebarHeader({ isCollapsed }: { isCollapsed: boolean }) {
   return (
-    <div className="h-20 flex items-center px-4 border-b border-slate-50 shrink-0">
-      <Link href="/dashboard" className="flex items-center gap-3">
-        <div className="w-14 h-14 rounded-xl bg-white border border-slate-100 overflow-hidden flex items-center justify-center shrink-0 shadow-sm transition-all duration-200">
-          <img
-            src="/logo.png"
-            alt="GmNC Logo"
-            className={cn(
-              "object-contain transition-all duration-200",
-              isCollapsed ? "w-10 h-10" : "w-14 h-14"
-            )}
-          />
+    <aside className="fixed left-0 top-0 h-screen w-[256px] bg-[#F8F9FA] border-r border-slate-200 flex flex-col z-50">
+      <div className="p-6 bg-white border-b border-slate-100">
+        <div className="flex items-center gap-3">
+          <div className="w-10 h-10 rounded-lg bg-white p-2 shadow-sm border border-slate-100">
+             <img src="/logo.png" alt="Logo" className="w-full h-full object-contain" />
+          </div>
+          <div>
+            <span className="text-xl font-bold text-[#059669] tracking-tight block">GmNC</span>
+            <span className="text-[8px] text-slate-500 font-extrabold tracking-widest uppercase block -mt-1">getmyneurocare</span>
+          </div>
         </div>
-        {!isCollapsed && (
-          <motion.span
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.1 }}
-            className="font-bold text-lg text-primary tracking-tight whitespace-nowrap"
-          >
-            GmNC{" "}
-            <span className="text-emerald-500 font-bold text-[10px] block -mt-1 uppercase tracking-wide">
-              getmyneurocare
-            </span>
-          </motion.span>
-        )}
-      </Link>
-    </div>
-  );
-}
+      </div>
 
-export function Sidebar() {
-  const { isCollapsed, toggleSidebar, isMobileOpen, closeMobileSidebar } = useLayout();
+      <nav className="flex-1 py-4 space-y-6 overflow-y-auto scrollbar-hide">
+        {MENU_CATEGORIES.map((category) => {
+          const visibleItems = category.items.filter(item => !item.permission || user?.permissions.includes(item.permission));
+          if (visibleItems.length === 0) return null;
 
-  return (
-    <>
-      {/* ─── Desktop Sidebar (md+) ─── */}
-      <motion.aside
-        initial={false}
-        animate={{ width: isCollapsed ? 80 : 280 }}
-        transition={{ type: "tween", duration: 0.2, ease: "easeInOut" }}
-        className={cn(
-          "relative h-screen bg-white border-r border-slate-100 text-slate-500 flex flex-col z-50 transition-all duration-200 ease-in-out",
-          "hidden md:flex fixed shadow-sm"
-        )}
-      >
-        <SidebarHeader isCollapsed={isCollapsed} />
-        <NavItems isCollapsed={isCollapsed} />
-
-        {/* Collapse toggle */}
-        <button
-          onClick={toggleSidebar}
-          className="absolute -right-3 top-24 w-6 h-6 bg-white border border-slate-200 rounded-full flex items-center justify-center text-slate-400 hover:text-primary transition-all shadow-md z-[60]"
-        >
-          <ChevronLeft
-            className={cn("w-4 h-4 transition-transform duration-200", isCollapsed && "rotate-180")}
-          />
-        </button>
-      </motion.aside>
-
-      {/* ─── Mobile Sidebar Drawer (< md) ─── */}
-      <AnimatePresence>
-        {isMobileOpen && (
-          <>
-            {/* Backdrop */}
-            <motion.div
-              key="mobile-backdrop"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 0.2 }}
-              className="fixed inset-0 z-[70] bg-black/40 backdrop-blur-sm md:hidden"
-              onClick={closeMobileSidebar}
-            />
-
-            {/* Drawer panel */}
-            <motion.aside
-              key="mobile-drawer"
-              initial={{ x: "-100%" }}
-              animate={{ x: 0 }}
-              exit={{ x: "-100%" }}
-              transition={{ type: "tween", duration: 0.25, ease: "easeInOut" }}
-              className="fixed inset-y-0 left-0 z-[80] w-72 bg-white border-r border-slate-100 flex flex-col shadow-2xl md:hidden"
-            >
-              {/* Header row with close button */}
-              <div className="flex items-center justify-between pr-4 border-b border-slate-50">
-                <SidebarHeader isCollapsed={false} />
-                <button
-                  onClick={closeMobileSidebar}
-                  className="w-8 h-8 rounded-xl bg-slate-50 flex items-center justify-center text-slate-400 hover:text-primary hover:bg-slate-100 transition-all"
-                >
-                  <X className="w-4 h-4" />
-                </button>
+          return (
+            <div key={category.title} className="space-y-1">
+              <h3 className="px-4 text-[10px] font-bold text-[#059669]/60 tracking-[0.1em] uppercase mb-2">
+                {category.title}
+              </h3>
+              <div className="space-y-0.5">
+                {renderMenuItems(category.items)}
               </div>
+            </div>
+          );
+        })}
+      </nav>
 
-              <NavItems isCollapsed={false} onNavClick={closeMobileSidebar} />
-            </motion.aside>
-          </>
-        )}
-      </AnimatePresence>
-    </>
+      <div className="p-4 bg-white border-t border-slate-100">
+        <button
+          onClick={logout}
+          className="flex items-center gap-3 px-4 py-2.5 w-full text-slate-500 hover:bg-emerald-50 hover:text-[#059669] transition-all duration-200 group text-[13px] font-medium"
+        >
+          <LogOutIcon className="w-4 h-4 group-hover:-translate-x-1 transition-transform" />
+          <span className="tracking-tight">Sign Out</span>
+        </button>
+      </div>
+    </aside>
   );
 }

@@ -13,10 +13,14 @@ function ProvidersSkeleton() {
   );
 }
 
+import { ProtectedRoute } from "@/components/auth/ProtectedRoute";
+
 export default function ProvidersPage() {
   return (
-    <Suspense fallback={<ProvidersSkeleton />}>
-      <ProvidersPageContent />
-    </Suspense>
+    <ProtectedRoute requiredRole="admin">
+      <Suspense fallback={<ProvidersSkeleton />}>
+        <ProvidersPageContent />
+      </Suspense>
+    </ProtectedRoute>
   );
 }

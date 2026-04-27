@@ -1,68 +1,69 @@
-"use client";
+'use client';
 
-import * as React from "react";
-import { X } from "lucide-react";
-import { motion, AnimatePresence } from "framer-motion";
-import { cn } from "@/lib/utils";
+import React, { useEffect } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { XIcon } from 'lucide-react';
+import { cn } from '@/lib/utils';
 
 interface ModalProps {
   isOpen: boolean;
   onClose: () => void;
   title: string;
   children: React.ReactNode;
-  maxWidth?: string;
+  className?: string;
 }
 
-export function Modal({ isOpen, onClose, title, children, maxWidth = "max-w-md" }: ModalProps) {
-  // Close on escape key
-  React.useEffect(() => {
-    const handleEsc = (e: KeyboardEvent) => {
-      if (e.key === "Escape") onClose();
+export const Modal: React.FC<ModalProps> = ({
+  isOpen,
+  onClose,
+  title,
+  children,
+  className,
+}) => {
+  useEffect(() => {
+    if (isOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'unset';
+    }
+    return () => {
+      document.body.style.overflow = 'unset';
     };
-    window.addEventListener("keydown", handleEsc);
-    return () => window.removeEventListener("keydown", handleEsc);
-  }, [onClose]);
+  }, [isOpen]);
 
   return (
     <AnimatePresence>
       {isOpen && (
-        <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 md:p-6">
-          {/* Backdrop */}
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             onClick={onClose}
-            className="absolute inset-0 bg-primary/20 backdrop-blur-md"
+            className="absolute inset-0 bg-slate-900/40 backdrop-blur-sm"
           />
-
-          {/* Modal Card */}
           <motion.div
-            initial={{ scale: 0.95, y: 20, opacity: 0 }}
-            animate={{ scale: 1, y: 0, opacity: 1 }}
-            exit={{ scale: 0.95, y: 20, opacity: 0 }}
+            initial={{ opacity: 0, scale: 0.95, y: 20 }}
+            animate={{ opacity: 1, scale: 1, y: 0 }}
+            exit={{ opacity: 0, scale: 0.95, y: 20 }}
             className={cn(
-              "relative bg-white rounded-[2.5rem] w-full p-8 md:p-10 shadow-2xl border border-slate-100",
-              maxWidth
+              'relative w-full max-w-lg overflow-hidden rounded-3xl bg-white border border-slate-200 shadow-2xl',
+              className
             )}
-            onClick={(e) => e.stopPropagation()}
           >
-            <div className="flex items-center justify-between mb-8">
-              <h3 className="text-2xl font-bold text-primary tracking-tight">{title}</h3>
-              <button 
-                onClick={onClose} 
-                className="text-slate-300 hover:text-primary transition-colors p-1"
+            <div className="flex items-center justify-between border-b border-slate-100 p-6">
+              <h3 className="text-xl font-bold text-slate-900">{title}</h3>
+              <button
+                onClick={onClose}
+                className="rounded-full p-2 text-slate-400 hover:bg-slate-100 hover:text-slate-900 transition-colors"
               >
-                <X size={24} />
+                <XIcon className="w-5 h-5" />
               </button>
             </div>
-            
-            <div className="custom-scrollbar max-h-[70vh] overflow-y-auto pr-2 -mr-2">
-              {children}
-            </div>
+            <div className="p-6">{children}</div>
           </motion.div>
         </div>
       )}
     </AnimatePresence>
   );
-}
+};

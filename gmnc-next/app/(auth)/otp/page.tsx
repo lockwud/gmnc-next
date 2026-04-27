@@ -7,8 +7,12 @@ import { motion } from "framer-motion";
 import { useRouter } from "next/navigation";
 import { AuthBackground } from "@/components/auth/AuthBackground";
 
+import { useAuth } from "@/lib/context/AuthContext";
+import { getDashboardRoute } from "@/lib/rbac";
+
 export default function OTPPage() {
   const router = useRouter();
+  const { selectedRole } = useAuth();
   const [otp, setOtp] = React.useState(["", "", "", "", "", ""]);
   const [isLoading, setIsLoading] = React.useState(false);
   const inputRefs = React.useRef<(HTMLInputElement | null)[]>([]);
@@ -35,7 +39,11 @@ export default function OTPPage() {
     setIsLoading(true);
     // Mock verification
     setTimeout(() => {
-      router.push("/dashboard");
+      if (selectedRole) {
+        router.push(getDashboardRoute(selectedRole));
+      } else {
+        router.push("/dashboard");
+      }
     }, 1200);
   };
 

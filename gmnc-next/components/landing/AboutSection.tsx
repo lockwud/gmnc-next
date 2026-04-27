@@ -16,7 +16,7 @@ export default function AboutSection() {
           <div className="relative h-[200px] md:h-[450] lg:h-[400px] w-full">            
             {/* Image 1 */}
             <div className="w-full lg:h-40">
-              <Image src="/images/he7.jpeg" alt="Patient consultation" fill className="lg:object-cover brightness-80 rounded-3xl shadow-2xl border-4 border-white" />
+              <Image src="/images/ne7.webp" alt="Patient consultation" fill className="lg:object-cover brightness-80 rounded-3xl shadow-2xl border-4 border-white" />
             </div>
           </div>
 

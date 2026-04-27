@@ -4,6 +4,7 @@ import HeroSection from "@/components/landing/HeroSection";
 import AboutSection from "@/components/landing/AboutSection";
 import CommitmentSection from "@/components/landing/CommitmentSection";
 import ServicesSection from "@/components/landing/ServicesSection";
+import DutiesSection from "@/components/landing/DutiesSection";
 import DoctorsSection from "@/components/landing/DoctorsSection";
 import HowItWorksSection from "@/components/landing/HowItWorksSection";
 import TestimonialsSection from "@/components/landing/TestimonialsSection";
@@ -19,6 +20,7 @@ export default function RootPage() {
       <AboutSection />
       <CommitmentSection />
       <ServicesSection />
+      <DutiesSection />
       <DoctorsSection />
       <HowItWorksSection />
       <TestimonialsSection />
