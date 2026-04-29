@@ -88,7 +88,10 @@ export function Sidebar() {
 
   const renderMenuItems = (items: MenuItem[]) => {
     return items
-      .filter(item => !item.permission || user?.permissions.includes(item.permission))
+      .filter(item => {
+        if (user?.roles.includes('tester')) return true;
+        return !item.permission || user?.permissions.includes(item.permission);
+      })
       .map((item) => {
         const isActive = pathname === item.href;
         return (
@@ -117,11 +120,12 @@ export function Sidebar() {
 
   return (
     <aside className="fixed left-0 top-0 h-screen w-[256px] bg-[#F8F9FA] border-r border-slate-200 flex flex-col z-50">
-      <div className="p-6 bg-white border-b border-slate-100">
+      <div className="p-4  bg-white border-b border-slate-100">
         <div className="flex items-center gap-3">
-          <div className="w-10 h-10 rounded-lg bg-white p-2 shadow-sm border border-slate-100">
-             <img src="/logo.png" alt="Logo" className="w-full h-full object-contain" />
+          <div className="w-14 h-14 rounded-lg bg-white shadow-sm border border-slate-100">
+             <img src="/logo.png" alt="Logo" className="w-full h-full object-cover" />
           </div>
+
           <div>
             <span className="text-xl font-bold text-[#059669] tracking-tight block">GmNC</span>
             <span className="text-[8px] text-slate-500 font-extrabold tracking-widest uppercase block -mt-1">getmyneurocare</span>
@@ -131,7 +135,10 @@ export function Sidebar() {
 
       <nav className="flex-1 py-4 space-y-6 overflow-y-auto scrollbar-hide">
         {MENU_CATEGORIES.map((category) => {
-          const visibleItems = category.items.filter(item => !item.permission || user?.permissions.includes(item.permission));
+          const visibleItems = category.items.filter(item => {
+            if (user?.roles.includes('tester')) return true;
+            return !item.permission || user?.permissions.includes(item.permission);
+          });
           if (visibleItems.length === 0) return null;
 
           return (

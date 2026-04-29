@@ -23,7 +23,7 @@ export const ROLE_PERMISSIONS: Record<Role, Permission[]> = {
   admin: ['appointment.read', 'appointment.write', 'system.manage', 'support.read', 'caregiver.read'],
   provider: ['appointment.read', 'appointment.write', 'telehealth.start', 'support.read', 'caregiver.read'],
   support: ['appointment.read', 'support.read'],
-  tester: ['tester.all'],
+  tester: ['tester.all', 'appointment.read', 'appointment.write', 'system.manage', 'support.read', 'caregiver.read', 'telehealth.start', 'telehealth.join'],
   caregiver: ['appointment.read', 'telehealth.join', 'caregiver.read'],
 };
 
