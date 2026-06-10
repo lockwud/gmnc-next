@@ -24,30 +24,23 @@ export const OryxStatCard: React.FC<OryxStatCardProps> = ({
   className,
 }) => {
   const colorMap = {
-    emerald: 'text-emerald-600 bg-emerald-50 border-emerald-100',
-    rose: 'text-emerald-600 bg-emerald-50 border-emerald-100',
-    slate: 'text-slate-600 bg-slate-50 border-slate-100',
-    amber: 'text-amber-600 bg-amber-50 border-amber-100',
-    blue: 'text-blue-600 bg-blue-50 border-blue-100',
+    emerald: 'text-emerald-600 ',
+    rose: 'text-emerald-600 ',
+    slate: 'text-slate-600 ',
+    amber: 'text-amber-600 ',
+    blue: 'text-blue-600 ',
   };
 
-  const badgeColorMap = {
-    emerald: 'bg-emerald-500',
-    rose: 'bg-emerald-500',
-    slate: 'bg-slate-500',
-    amber: 'bg-amber-500',
-    blue: 'bg-blue-500',
-  };
 
   return (
-    <Card className={cn('p-6 bg-white border border-slate-100 shadow-sm transition-all hover:shadow-md relative group overflow-hidden', className)}>
+    <Card className={cn('p-5 bg-white border border-slate-200 relative overflow-hidden', className)}>
       <div className="flex justify-between items-start mb-4">
-        <h3 className="text-sm font-bold text-slate-800">{title}</h3>
+        <h3 className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">{title}</h3>
         {icon && <div className="text-slate-400 group-hover:text-[#10B981] transition-colors">{icon}</div>}
       </div>
       
       <div className="mb-4">
-        <span className="text-3xl font-extrabold text-slate-900 tracking-tight">{value}</span>
+        <span className="text-2xl font-bold text-slate-900 tracking-tight">{value}</span>
       </div>
 
       {subMetrics && subMetrics.length > 0 && (
@@ -56,7 +49,7 @@ export const OryxStatCard: React.FC<OryxStatCardProps> = ({
             <div 
               key={idx} 
               className={cn(
-                "flex items-center gap-1.5 px-2 py-0.5 rounded-md border text-[10px] font-bold uppercase tracking-wider",
+                "flex items-center gap-1.5 px-2 py-0.5 rounded text-[9px] font-bold uppercase tracking-wider",
                 colorMap[metric.color]
               )}
             >
@@ -66,9 +59,6 @@ export const OryxStatCard: React.FC<OryxStatCardProps> = ({
           ))}
         </div>
       )}
-
-      {/* Decorative top border active on hover */}
-      <div className="absolute top-0 left-0 right-0 h-1 bg-[#10B981] scale-x-0 group-hover:scale-x-100 transition-transform origin-left" />
     </Card>
   );
 };

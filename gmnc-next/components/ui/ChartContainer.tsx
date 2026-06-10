@@ -18,7 +18,7 @@ export const ChartContainer: React.FC<ChartContainerProps> = ({
   actions,
 }) => {
   return (
-    <Card className={cn('border border-slate-200 bg-white text-slate-900 shadow-sm', className)}>
+    <Card className={cn('border border-slate-200 bg-white text-slate-900 overflow-hidden', className)}>
       <CardHeader className="flex flex-row items-center justify-between pb-2 border-b border-slate-50">
         <div className="space-y-0.5">
           <CardTitle className="text-lg font-bold text-slate-900">{title}</CardTitle>
@@ -28,7 +28,7 @@ export const ChartContainer: React.FC<ChartContainerProps> = ({
         </div>
         {actions && <div className="flex items-center gap-2">{actions}</div>}
       </CardHeader>
-      <CardContent className="p-6">
+      <CardContent className="p-4">
         <div className="h-[300px] w-full">
           {children}
         </div>

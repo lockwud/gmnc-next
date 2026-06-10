@@ -1,16 +1,9 @@
 import type { Metadata, Viewport } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
+// Temporary fallback to resolve Turbopack font module error
+const geistSans = { variable: "--font-geist-sans" };
+const geistMono = { variable: "--font-geist-mono" };
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://getmyneurocare.org"),
@@ -71,8 +64,7 @@ export const viewport: Viewport = {
   maximumScale: 5,
 };
 
-import { AuthProvider } from "../lib/context/AuthContext";
-import { UIProvider } from "../lib/context/UIContext";
+
 
 export default function RootLayout({
   children,
@@ -85,11 +77,7 @@ export default function RootLayout({
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
       <body className="min-h-full w-full flex flex-col">
-        <AuthProvider>
-          <UIProvider>
-            {children}
-          </UIProvider>
-        </AuthProvider>
+        {children}
       </body>
     </html>
   );

@@ -22,7 +22,7 @@
 
 @layer base {
   * {
-    @apply border-slate-200;
+    /* Borders removed globally as per user request for cleaner text appearance */
   }
   body {
     @apply bg-content-bg text-primary antialiased;

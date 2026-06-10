@@ -54,7 +54,7 @@ export default function LandingNavbar() {
               <div className="py-2 flex flex-col">
                 <Link href="#testimonials" className="px-4 py-2 text-sm text-slate-600 hover:bg-slate-50 hover:text-blue-600">Testimonials</Link>
                 <Link href="#doctors" className="px-4 py-2 text-sm text-slate-600 hover:bg-slate-50 hover:text-blue-600">Our Team</Link>
-                <Link href="#faq" className="px-4 py-2 text-sm text-slate-600 hover:bg-slate-50 hover:text-blue-600">FAQ</Link>
+                <Link href="terms" className="px-4 py-2 text-sm text-slate-600 hover:bg-slate-50 hover:text-blue-600">FAQ</Link>
               </div>
             </div>
           </div>

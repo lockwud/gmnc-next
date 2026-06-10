@@ -109,7 +109,7 @@ export default function FooterSection() {
               </div>
               <div className="flex gap-4">
                 <Link href="#" className="hover:text-white transition-colors">Privacy Policy</Link>
-                <Link href="#" className="hover:text-white transition-colors">Terms & Condition</Link>
+                <Link href="/terms" className="hover:text-white transition-colors">Terms & Conditions</Link>
                 <Link href="#" className="hover:text-white transition-colors">Do not share or sell my information</Link>
               </div>
             </div>

@@ -45,18 +45,18 @@ export function Table<T extends { id: string | number }>({
             <input
               type="text"
               placeholder={searchPlaceholder}
-              className="pl-10 pr-4 py-2 bg-white border border-slate-200 rounded-xl text-sm text-slate-900 focus:outline-none focus:ring-2 focus:ring-primary/20 w-full sm:w-64 transition-all"
+              className="pl-10 pr-4 py-2 bg-white border border-slate-200 rounded-lg text-sm text-slate-900 focus:outline-none focus:ring-2 focus:ring-primary/20 w-full sm:w-64 transition-all"
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
             />
           </div>
-          <button className="p-2 bg-white border border-slate-200 rounded-xl text-slate-400 hover:text-slate-900 hover:bg-slate-50 transition-all">
+          <button className="p-2 bg-white border border-slate-200 rounded-lg text-slate-400 hover:text-slate-900 hover:bg-slate-50 transition-all">
             <FilterIcon className="w-4 h-4" />
           </button>
         </div>
       </div>
 
-      <div className="overflow-x-auto rounded-2xl border border-slate-200 bg-white shadow-sm">
+      <div className="overflow-x-auto rounded border border-slate-200 bg-white">
         <table className="w-full text-left border-collapse">
           <thead>
             <tr className="border-b border-slate-100 bg-slate-50/50">
@@ -64,14 +64,14 @@ export function Table<T extends { id: string | number }>({
                 <th
                   key={idx}
                   className={cn(
-                    'p-4 text-[11px] font-bold text-slate-500 uppercase tracking-wider',
+                    'p-3 text-[10px] font-bold text-slate-400 uppercase tracking-wider',
                     col.className
                   )}
                 >
                   {col.header}
                 </th>
               ))}
-              {actions && <th className="p-4 text-[11px] font-bold text-slate-500 uppercase tracking-wider text-right">Actions</th>}
+              {actions && <th className="p-3 text-[10px] font-bold text-slate-400 uppercase tracking-wider text-right">Actions</th>}
             </tr>
           </thead>
           <tbody>
@@ -86,14 +86,14 @@ export function Table<T extends { id: string | number }>({
                   onClick={() => onRowClick?.(item)}
                 >
                   {columns.map((col, colIdx) => (
-                    <td key={colIdx} className={cn('p-4 text-sm text-slate-600', col.className)}>
+                    <td key={colIdx} className={cn('p-3 text-sm text-slate-600', col.className)}>
                       {typeof col.accessor === 'function'
                         ? col.accessor(item)
                         : (item[col.accessor] as React.ReactNode)}
                     </td>
                   ))}
                   {actions && (
-                    <td className="p-4 text-right">
+                    <td className="p-3 text-right">
                       {actions(item)}
                     </td>
                   )}
