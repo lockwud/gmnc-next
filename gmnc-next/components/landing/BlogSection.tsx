@@ -1,4 +1,3 @@
-import { Plus } from "lucide-react";
 import Image from "next/image";
 
 export default function BlogSection() {
@@ -6,7 +5,7 @@ export default function BlogSection() {
     <section className="py-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div className="flex flex-col items-center text-center max-w-3xl mx-auto mb-16">
         <div className="flex items-center gap-2 mb-4">
-          <Plus className="w-5 h-5 text-blue-600" />
+   
           <h4 className="text-blue-600 font-bold tracking-wider uppercase text-sm">Blog & News</h4>
         </div>
         <h2 className="text-3xl md:text-5xl font-bold text-slate-900 mb-6">

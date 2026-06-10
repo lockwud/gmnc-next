@@ -1,4 +1,4 @@
-import { Plus, Quote, Star } from "lucide-react";
+import {  Quote, Star } from "lucide-react";
 import Image from "next/image";
 
 export default function TestimonialsSection() {
@@ -29,7 +29,6 @@ export default function TestimonialsSection() {
         
         <div className="flex flex-col items-center text-center max-w-3xl mx-auto mb-16 text-white">
           <div className="flex items-center gap-2 mb-4 text-yellow-400">
-            <Plus className="w-5 h-5" />
             <h4 className=" font-bold tracking-wider uppercase text-sm">Patient Testimonials</h4>
           </div>
           <h2 className="text-3xl md:text-5xl font-bold mb-6 leading-tight">

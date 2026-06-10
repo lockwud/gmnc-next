@@ -21,6 +21,12 @@ export default function DoctorsSection() {
       name: "Thomas Quaye Dodzi",
       role: "Physiotherapist",
       image: "/images/thomas.jpeg",
+    },
+    {
+      id: 4,
+      name: "Pearl Exonam Selormey ",
+      role: "Dietitian Nutritionist",
+      image: "/images/salormey.jpeg",
     }
   ];
 
@@ -37,7 +43,7 @@ export default function DoctorsSection() {
           </p>
         </div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid md:grid-cols-3 lg:grid-cols-4 gap-8">
           {doctors.map((doctor) => (
             <div key={doctor.id} className="bg-white rounded-2xl shadow-sm border border-slate-100 overflow-hidden group hover:shadow-xl transition-shadow duration-300">
               <div className="aspect-[4/4] bg-gradient-to-br from-indigo-50 to-blue-50 relative flex items-center justify-center overflow-hidden">

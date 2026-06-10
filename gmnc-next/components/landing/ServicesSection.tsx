@@ -1,4 +1,4 @@
-import { Plus, Pill, UserCheck, Stethoscope, HeartPulse, ShieldCheck, PhoneCall } from "lucide-react";
+import {  Pill, UserCheck, Stethoscope, HeartPulse, ShieldCheck, PhoneCall } from "lucide-react";
 
 export default function ServicesSection() {
   const services = [
@@ -50,7 +50,6 @@ export default function ServicesSection() {
     <section id="services" className="py-16 lg:py-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div className="flex flex-col flex-wrap items-center text-center max-w-3xl mx-auto mb-16">
         <div className="flex items-center gap-2 mb-4">
-          <Plus className="w-5 h-5 text-blue-600" />
           <h4 className="text-blue-600 font-bold tracking-wider uppercase text-sm">Our Services</h4>
         </div>
         <h2 className="text-3xl md:text-5xl font-bold text-slate-900 mb-6">

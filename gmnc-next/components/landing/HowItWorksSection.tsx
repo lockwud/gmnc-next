@@ -1,5 +1,4 @@
-import { Plus } from "lucide-react";
-import Image from "next/image";
+
 
 export default function HowItWorksSection() {
   const steps = [
@@ -30,7 +29,6 @@ export default function HowItWorksSection() {
       <div className="flex flex-col justify-center gap-3 items-center text-center mb-12">
         <div className="">
           <div className="flex justify-center items-center gap-2 mb-4">
-            <Plus className="w-5 h-5 text-blue-600" />
             <h4 className="text-blue-600 font-bold tracking-wider uppercase text-sm">How It Works</h4>
           </div>
           <h2 className="text-3xl md:text-5xl font-bold text-slate-900 leading-tight">
