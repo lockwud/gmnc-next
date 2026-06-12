@@ -53,7 +53,7 @@ export default function LandingNavbar() {
             <div className="absolute top-full right-0 mt-2 w-48 bg-white rounded-lg shadow-xl border border-slate-100 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 transform origin-top translate-y-2 group-hover:translate-y-0">
               <div className="py-2 flex flex-col">
                 <Link href="#testimonials" className="px-4 py-2 text-sm text-slate-600 hover:bg-slate-50 hover:text-blue-600">Testimonials</Link>
-                <Link href="#doctors" className="px-4 py-2 text-sm text-slate-600 hover:bg-slate-50 hover:text-blue-600">Our Team</Link>
+                <Link href="#team" className="px-4 py-2 text-sm text-slate-600 hover:bg-slate-50 hover:text-blue-600">Our Team</Link>
                 <Link href="terms" className="px-4 py-2 text-sm text-slate-600 hover:bg-slate-50 hover:text-blue-600">FAQ</Link>
               </div>
             </div>
