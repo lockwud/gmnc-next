@@ -21,10 +21,8 @@ export default function HeroSection() {
           <div className="absolute inset-0 bg-gradient-to-r from-[#192233] via-[#192233]/90 to-transparent"></div>
         </div>
 
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          <div className="grid lg:grid-cols-2 gap-12 items-center">
-            
-            {/* Left Content */}
+  
+          <div className="max-w-5 flex sm:px-20 px-5 items-center">      
             <div className="text-white z-10 relative">
               <div className="flex items-center gap-2 text-orange-400 mb-6">
                 <span className="text-sm font-semibold tracking-wider uppercase">Welcome to GmNC</span>
@@ -53,22 +51,9 @@ export default function HeroSection() {
                 </Link>
               </div>
             </div>
-
-            {/* Right Stats */}
-            <div className="hidden lg:flex flex-col items-end justify-center gap-6 z-10 relative">
-              <div className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-lg p-8 w-64 text-center transform hover:-translate-y-1 transition-transform">
-                <h3 className="text-4xl font-bold text-white mb-2">15</h3>
-                <p className="text-white text-sm">Years of Clinical Experience</p>
-              </div>
-              <div className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-lg p-8 w-64 text-center transform hover:-translate-y-1 transition-transform mr-12">
-                <h3 className="text-4xl font-bold text-white mb-2">500</h3>
-                <p className="text-white text-sm">Successful Therapy Sessions</p>
-              </div>
-            </div>
-            
           </div>
         </div>
-      </div>
+
 
       {/* Overlapping Bottom Banner */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-20 -mt-24 mb-16 lg:-mt-32 lg:mb-24">
