@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import ContactForm from "@/components/landing/ContactForm";
 import LandingPageEnhancements from "@/components/landing/LandingPageEnhancements";
 import {
   Activity,
@@ -213,29 +214,7 @@ export default function RootPage() {
           <h2>Leave us a message and we&apos;ll help with the next step.</h2>
         </div>
         <div className="landing-contact-panel">
-          <form className="landing-contact-form" action="mailto:support@getmyneurocare.com" method="post" encType="text/plain">
-            <div className="landing-form-row">
-              <label>
-                <span>Name</span>
-                <input type="text" name="name" placeholder="Your name" required />
-              </label>
-              <label>
-                <span>Email</span>
-                <input type="email" name="email" placeholder="you@example.com" required />
-              </label>
-            </div>
-            <label>
-              <span>Phone</span>
-              <input type="tel" name="phone" placeholder="+233 54 859 9553" />
-            </label>
-            <label>
-              <span>Message</span>
-              <textarea name="message" placeholder="Tell us how we can help" rows={4} required />
-            </label>
-            <button type="submit">
-              Send message <ArrowRight size={20} />
-            </button>
-          </form>
+          <ContactForm />
 
           <div className="landing-contact-actions">
             <Link href="mailto:support@getmyneurocare.com">
