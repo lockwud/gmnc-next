@@ -8,17 +8,17 @@ const playStoreTestUrl = "https://play.google.com/apps/internaltest/470158882742
 const appFeatures = [
   {
     title: "Book care faster",
-    text: "Request appointments, review upcoming sessions, and keep family schedules organized.",
+    text: "Request appointments, review upcoming sessions, and keep family schedule organized.",
     icon: CalendarCheck,
   },
   {
     title: "Track therapy goals",
-    text: "See therapy plans, home guidance, and progress notes without searching through messages.",
+    text: "See therapy plans, home guidance, and progress notes without search through messages.",
     icon: TrendingUp,
   },
   {
     title: "Care team updates",
-    text: "Receive timely reminders and updates from specialists supporting your child's neurorehab journey.",
+    text: "Receive timely reminders and updates from specialists support your child's neurorehab journey.",
     icon: Bell,
   },
 ];
@@ -53,7 +53,7 @@ export default function DownloadPage() {
           </div>
           <h1>Neuro care in your pocket.</h1>
           <p>
-            GetMyNeurocare helps families book sessions, follow therapy plans, and keep progress updates close between clinic visits.
+            GetMyNeurocare help families book sessions, follow therapy plans, and keep progress updates close between clinic visits.
           </p>
 
           <div id="stores" className="app-store-section" aria-label="Download GetMyNeurocare">
@@ -120,7 +120,7 @@ export default function DownloadPage() {
           <p className="landing-section-label">Built around families</p>
           <h2>Less guessing between appointments.</h2>
           <p>
-            The app keeps the important details visible so caregivers know what happened, what comes next, and how to support care at home.
+            The app keep the important details visible so caregivers know what happen, what come next, and how to support care at home.
           </p>
         </div>
         <div className="app-check-list">

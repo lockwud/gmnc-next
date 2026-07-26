@@ -70,7 +70,7 @@ export default function RootPage() {
           </div>
           <h1>Neuro care that feels simple.</h1>
           <p>
-            Get My Neuro Care connects families with pediatric neurorehabilitation specialists, therapy plans, and progress tracking without the heavy clinical back-and-forth.
+            Get My Neuro Care connect families with pediatric neurorehabilitation specialists, therapy plans, and progress tracking without the heavy clinical back-and-forth.
           </p>
           <div className="landing-actions">
             <Link href="#contact" className="landing-button landing-button-dark">
@@ -152,12 +152,12 @@ export default function RootPage() {
           <p className="landing-section-label">Gemini-powered chat</p>
           <h2>Quick answers before the next appointment.</h2>
           <p>
-            The in-app AI chatbot helps families understand care instructions, prepare questions, and get simple guidance on using GetMyNeurocare. It supports the care journey without replacing a clinician.
+            The in-app AI chatbot help families understand care instructions, prepare questions, and get simple guidance on using GetMyNeurocare. It support the care journey without replacing a clinician.
           </p>
           <div className="landing-ai-points">
-            <span>Explains therapy instructions in plain language</span>
-            <span>Helps prepare questions for specialists</span>
-            <span>Guides families around app features and next steps</span>
+            <span>Explain therapy instructions in plain language</span>
+            <span>Help prepare questions for specialists</span>
+            <span>Guide families around app features and next steps</span>
           </div>
         </div>
 
@@ -168,7 +168,7 @@ export default function RootPage() {
           </div>
           <div className="landing-chat-bubble landing-chat-bubble-user">How do I prepare for my child&apos;s next therapy review?</div>
           <div className="landing-chat-bubble landing-chat-bubble-ai">
-            Bring recent progress notes, list any changes you noticed at home, and write down questions for the specialist. If symptoms feel urgent, contact your clinician directly.
+            Bring recent progress notes, list any changes you notice at home, and write down questions for the specialist. If symptoms feel urgent, contact your clinician directly.
           </div>
           <div className="landing-ai-input">
             Ask about care steps...
